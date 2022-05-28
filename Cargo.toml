@@ -2,12 +2,14 @@
 name = "wgtr-scene-manager"
 version = "0.1.0"
 edition = "2021"
-authors = ["Wiktor Janecki", "j.wiktor05@interia.pl"]
+authors = ["Wiktor Janecki <j.wiktor05@interia.pl>"]
 readme = "README.md"
+license = "MIT"
 repository = "https://github.com/wiktorjanecki/wgtr-scene-manager"
 homepage = "https://github.com/wiktorjanecki/wgtr-scene-manager"
 description = """
 Simple scene manager with easy to understand functions
 """
+keywords = ["gamedev"]
 
 [dependencies]
