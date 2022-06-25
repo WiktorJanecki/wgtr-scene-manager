@@ -1,4 +1,4 @@
-use wgtr_scene_manager::wgtr::*;
+use wgtr_scene_manager::*;
 struct MyScene;
 impl Scene for MyScene {
     fn init(&mut self) {

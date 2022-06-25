@@ -1,4 +1,4 @@
-use wgtr_scene_manager::wgtr;
+use wgtr_scene_manager::*;
 
 struct First<'a>{
     x: &'a mut i32,
@@ -7,46 +7,46 @@ struct First<'a>{
 struct Second{
 
 }
-impl wgtr::Scene for Second{
+impl Scene for Second{
     fn init(&mut self){
         println!("Second scene has started!");
     }
-    fn update(&mut self) -> wgtr::Transition{
-        return wgtr::Transition::Exit;
+    fn update(&mut self) -> Transition{
+        return Transition::Exit;
     }
 }
 
-impl <'a> wgtr::Scene for First <'a>{
+impl <'a> Scene for First <'a>{
     fn init(&mut self){
         *self.x = 0;
     }
     fn render(&mut self){
 
     }
-    fn update(&mut self) -> wgtr::Transition{
+    fn update(&mut self) -> Transition{
         println!("The value of x in first scene is {}", self.x);
         if *self.x == 10 {
-            return wgtr::Transition::Next(Box::new(Second{}))
+            return Transition::Next(Box::new(Second{}))
         }
         *self.x += 1;
-        return wgtr::Transition::Skip;
+        return Transition::Skip;
     }
 }
 fn main() {
     let mut x = 5;
     {
-        let mut actual: Box<dyn wgtr::Scene> = Box::new(First{x:&mut x});
+        let mut actual: Box<dyn Scene> = Box::new(First{x:&mut x});
         'scene_loop: loop {
             actual.init();
             loop {
                 // Game loop
                 match actual.update() {
-                    wgtr::Transition::Next(next) => {
+                    Transition::Next(next) => {
                         actual = next;
                         break;
                     }
-                    wgtr::Transition::Exit => break 'scene_loop,
-                    wgtr::Transition::Skip => {}
+                    Transition::Exit => break 'scene_loop,
+                    Transition::Skip => {}
                 }
                 actual.render();
             }
